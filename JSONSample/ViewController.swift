@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var excerptTextView: UITextView!
@@ -33,7 +32,6 @@ class ViewController: UIViewController {
                                     print(error)
                                 case .success(let contents):
                                     self.contents = contents
-                                    //                                    print("contents:\(contents)")
                                     getImage()
                                 }
                             }
@@ -52,7 +50,6 @@ class ViewController: UIViewController {
                                     print(error)
                                 case .success(let imageData):
                                     self.imageData = imageData
-                                    //                                    print("imageData：\(imageData)")
                                     makeArticle()
                                 }
                             }
@@ -93,22 +90,6 @@ class ViewController: UIViewController {
                                       range: nil)
 
             imageView.image = UIImage(data: $0.wordPressImage)
-
-//            titleLabel.text
-//                = $0.wordPressContents
-//                .content?
-//                .title
-//                .rendered
-
-//            excerptTextView.text
-//                = $0.wordPressContents
-//                .content?
-//                .excerpt
-//                .rendered
-//                .replacingOccurrences(of: "<.+?>|&.+?;",
-//                                      with: "",
-//                                      options: .regularExpression,
-//                                      range: nil)
         }
     }
 }

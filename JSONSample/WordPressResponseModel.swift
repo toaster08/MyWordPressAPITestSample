@@ -18,7 +18,6 @@ struct WordPressContents:Decodable {
 }
 
 struct WordPressResposeModel {
-
     var title:String
     var excerpt:String
     var links:String
@@ -94,7 +93,7 @@ extension ImageResponseModel:Decodable {
             .nestedContainer(keyedBy: CustomCodingKeys.self,
                              forKey: .medium)
             .decode(String.self,forKey: .sourceurl)
-        
+
         self.init(mediadetails: source)
     }
 }

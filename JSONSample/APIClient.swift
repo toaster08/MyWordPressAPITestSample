@@ -12,7 +12,6 @@ enum WordPressError: Error {
 }
 
 final class APIClient {
-
     static let myWordPress = "https://ytoaster.com//wp-json/wp/v2/posts"
     static let shared = APIClient()
     private init() { }
@@ -22,45 +21,26 @@ final class APIClient {
                 completion:(((Result<[WordPressContents],
                                      WordPressError>) -> Void)? )) {
 
-        guard let url
-                = URL(string: url) else {
-//            print("URLが見つかりません")
-            return
-        }
-
+        guard let url = URL(string: url) else { return }
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
 
             guard let data = data else { return }
-//            print(data)
             guard let wordpressResponse
                     = try? JSONDecoder().decode([WordPressResposeModel].self,
                                                 from: data)  else {
-//                print("デコードに失敗")
                 completion?(.failure(.error))
                 return
             }
 
             self.imageLink = wordpressResponse.compactMap { $0.links }
 
-//            self.imageLink = wordpressResponse.flatMap {
-//                $0.links
-//                    .featuredmedia
-//                    .map {
-//                        $0.href
-//                    }}
-
             var wordPressArticles:[WordPressContents] = .init()
             for (response,imageLink) in zip(wordpressResponse, self.imageLink) {
-//                print(response)
-//                print(imageLink)
-                print(imageLink)
                 wordPressArticles
                     .append(WordPressContents(content: response,
                                               captureImageLink: imageLink))
             }
-
-
 
             completion?(.success(wordPressArticles))
         }
@@ -79,32 +59,20 @@ class ImageDownLoader {
         for (i,content) in contents.enumerated() {
             guard let captureImageLink = content.captureImageLink,
                   let url = URL(string: captureImageLink) else {
-                print("URLが見つかりません")
                 return
             }
 
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
 
-                guard let data = data else {
-//                    print("dataが見つかりません")
-                    return
-                }
-
+                guard let data = data else { return }
                 guard let wordPressImageResponse
                         = try? JSONDecoder().decode(ImageResponseModel.self, from: data) else {
-//                    print("デコードできません")
                     completion?(.failure(WordPressError.error))
                     return
                 }
 
                 let imageURL = wordPressImageResponse.mediadetails
-
-//                let imageURL = wordPressImageResponse
-//                    .mediadetails
-//                    .sizes
-//                    .medium
-//                    .sourceurl
 
                 guard let image = URL(string: imageURL) else {
                     fatalError()
@@ -114,9 +82,7 @@ class ImageDownLoader {
                     fatalError()
                 }
 
-//                print("imageData:\(imageData)")
                 self.imageData.append(imageData)
-
                 if i == (contents.count - 1) {
                     completion?(.success(self.imageData))
                 }
