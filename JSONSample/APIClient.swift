@@ -34,24 +34,27 @@ final class APIClient {
             guard let data = data else { return }
 //            print(data)
             guard let wordpressResponse
-                    = try? JSONDecoder().decode([WordPressResponseModel].self,
+                    = try? JSONDecoder().decode([WordPressResposeModel].self,
                                                 from: data)  else {
 //                print("デコードに失敗")
                 completion?(.failure(.error))
                 return
             }
 
-            self.imageLink = wordpressResponse.flatMap {
-                $0.links
-                    .featuredmedia
-                    .map {
-                        $0.href
-                    }}
+            self.imageLink = wordpressResponse.compactMap { $0.links }
+
+//            self.imageLink = wordpressResponse.flatMap {
+//                $0.links
+//                    .featuredmedia
+//                    .map {
+//                        $0.href
+//                    }}
 
             var wordPressArticles:[WordPressContents] = .init()
             for (response,imageLink) in zip(wordpressResponse, self.imageLink) {
 //                print(response)
 //                print(imageLink)
+                print(imageLink)
                 wordPressArticles
                     .append(WordPressContents(content: response,
                                               captureImageLink: imageLink))
@@ -76,7 +79,7 @@ class ImageDownLoader {
         for (i,content) in contents.enumerated() {
             guard let captureImageLink = content.captureImageLink,
                   let url = URL(string: captureImageLink) else {
-//                print("URLが見つかりません")
+                print("URLが見つかりません")
                 return
             }
 
@@ -88,7 +91,6 @@ class ImageDownLoader {
                     return
                 }
 
-                print(data)
                 guard let wordPressImageResponse
                         = try? JSONDecoder().decode(ImageResponseModel.self, from: data) else {
 //                    print("デコードできません")
@@ -96,11 +98,13 @@ class ImageDownLoader {
                     return
                 }
 
-                let imageURL = wordPressImageResponse
-                    .mediadetails
-                    .sizes
-                    .medium
-                    .sourceurl
+                let imageURL = wordPressImageResponse.mediadetails
+
+//                let imageURL = wordPressImageResponse
+//                    .mediadetails
+//                    .sizes
+//                    .medium
+//                    .sourceurl
 
                 guard let image = URL(string: imageURL) else {
                     fatalError()

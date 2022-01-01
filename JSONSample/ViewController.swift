@@ -48,6 +48,7 @@ class ViewController: UIViewController {
                             DispatchQueue.main.async { [self] in
                                 switch result {
                                 case .failure(let error):
+                                    print("ここでエラー") 
                                     print(error)
                                 case .success(let imageData):
                                     self.imageData = imageData
@@ -76,9 +77,38 @@ class ViewController: UIViewController {
 
     func configure(){
         self.articles.forEach {
-            titleLabel.text = $0.wordPressContents.content?.title.rendered
-            excerptTextView.text = $0.wordPressContents.content?.excerpt.rendered
+
+            titleLabel.text
+                = $0.wordPressContents
+                .content?
+                .title
+
+            excerptTextView.text
+                = $0.wordPressContents
+                .content?
+                .excerpt
+                .replacingOccurrences(of: "<.+?>|&.+?;",
+                                      with: "",
+                                      options: .regularExpression,
+                                      range: nil)
+
             imageView.image = UIImage(data: $0.wordPressImage)
+
+//            titleLabel.text
+//                = $0.wordPressContents
+//                .content?
+//                .title
+//                .rendered
+
+//            excerptTextView.text
+//                = $0.wordPressContents
+//                .content?
+//                .excerpt
+//                .rendered
+//                .replacingOccurrences(of: "<.+?>|&.+?;",
+//                                      with: "",
+//                                      options: .regularExpression,
+//                                      range: nil)
         }
     }
 }

@@ -23,16 +23,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TB6-XE-s7l">
-                                <rect key="frame" x="40" y="284" width="334" height="68"/>
+                                <rect key="frame" x="40" y="284" width="334" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="KfX-ul-xBH"/>
+                                    <constraint firstAttribute="height" constant="48" id="KfX-ul-xBH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PXg-3I-C08">
-                                <rect key="frame" x="40" y="412" width="334" height="279"/>
+                                <rect key="frame" x="40" y="349" width="334" height="279"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -50,8 +50,8 @@
                             <constraint firstItem="PXg-3I-C08" firstAttribute="centerX" secondItem="h4h-Ix-2GE" secondAttribute="centerX" id="gP8-Kv-MJ0"/>
                             <constraint firstItem="TB6-XE-s7l" firstAttribute="top" secondItem="h4h-Ix-2GE" secondAttribute="bottom" constant="56" id="hNs-bb-AQE"/>
                             <constraint firstItem="h4h-Ix-2GE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="56" id="ho8-cx-0uL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PXg-3I-C08" secondAttribute="bottom" constant="171" id="jir-nc-e2R"/>
-                            <constraint firstItem="PXg-3I-C08" firstAttribute="top" secondItem="TB6-XE-s7l" secondAttribute="bottom" constant="60" id="nQ6-C0-j4i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PXg-3I-C08" secondAttribute="bottom" constant="234" id="jir-nc-e2R"/>
+                            <constraint firstItem="PXg-3I-C08" firstAttribute="top" secondItem="TB6-XE-s7l" secondAttribute="bottom" constant="17" id="nQ6-C0-j4i"/>
                             <constraint firstItem="h4h-Ix-2GE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="yCc-vg-R89"/>
                         </constraints>
                     </view>
